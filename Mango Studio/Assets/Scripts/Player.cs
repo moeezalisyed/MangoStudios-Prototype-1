@@ -17,6 +17,10 @@ public class Player : MonoBehaviour {
 		this.m = m;
 
 		var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
+		BoxCollider2D playerbody = gameObject.AddComponent<BoxCollider2D> ();
+		Rigidbody2D playerRbody = gameObject.AddComponent<Rigidbody2D> ();
+		playerRbody.gravityScale = 0;
+		playerbody.isTrigger = true;
 		model = modelObject.AddComponent<playerModel>();						// Add an playerModel script to control visuals of the gem.
 		model.init(playerType, this);						
 	}
@@ -36,7 +40,7 @@ public class Player : MonoBehaviour {
 
 	public void
 	 destroy(){
-		model.destroy();
+		model.damage();
 	}
 
 	public void shoot(){
@@ -49,6 +53,19 @@ public class Player : MonoBehaviour {
 
 	public int getType(){
 		return model.getType();
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		print ("entered collider on player");
+		if (other.name == "Boss") {
+			this.destroy ();
+		}
+		if (other.name == "BossBullet") {
+			this.destroy ();
+		}
+		if (other.name == "BossBeam") {
+			this.destroy ();
+		}
 	}
 }
 

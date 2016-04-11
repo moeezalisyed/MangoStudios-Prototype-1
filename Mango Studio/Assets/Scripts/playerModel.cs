@@ -13,7 +13,7 @@ public class playerModel : MonoBehaviour
 	private int movex;
 	private int movey;
 	private float speed;
-	private int healthval = 1;
+	private int healthval = 10;
 	//private float damagebuf;
 	private float cd;
 	private float cdbuf;
@@ -62,7 +62,7 @@ public class playerModel : MonoBehaviour
 	void Update(){
 		clock += Time.deltaTime;
 		if (firstRun) {
-			shadowMovements.Add (this.transform.localPosition);
+			shadowMovements.Add (this.transform.position);
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				shadowFiring.Add (true);
 			} else {
@@ -96,7 +96,7 @@ public class playerModel : MonoBehaviour
 			if (shadowFiring [shadowitr] == true) {
 				this.shoot ();
 			}
-			this.transform.localPosition = shadowMovements [shadowitr];
+			this.transform.position = shadowMovements [shadowitr];
 			shadowitr++;
 
 		
@@ -140,10 +140,14 @@ public class playerModel : MonoBehaviour
 	}
 
 	public void damage(){
-		healthval = 0;
+		healthval--;
+		if (healthval == 0) {
+			this.destroy ();
+		}
 	}
 
 	public void destroy(){
+		
 		firstRun = false;
 	}
 
@@ -190,6 +194,7 @@ public class playerModel : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		print ("col");
 		if (other.name == "Boss") {
 			this.damage ();
 		}

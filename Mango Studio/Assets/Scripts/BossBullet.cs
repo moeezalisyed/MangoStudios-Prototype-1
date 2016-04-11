@@ -32,6 +32,7 @@ public class BossBullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		print ("entered collider in boss bullet");
 		if (other.name == "Player") {
 			Destroy (this.gameObject);
 		}

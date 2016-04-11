@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int boardWidth, boardHeight; // board size init is in Unity editor
     private GameObject playerFolder;// folders for object organization
 
-    private List<Player> players; // list of all placed towers
+    private List<Player> players; // list of all placed players
 	public Player currentplayer;
 
     // Beat tracking
