@@ -47,9 +47,9 @@ public class playerModel : MonoBehaviour
 			mat.mainTexture = Resources.Load<Texture2D> ("Textures/Triangle");
 			mat.color = new Color (5, 1, 1, 1);
 		} else if (playerType == 3) {
-			mat.mainTexture = Resources.Load<Texture2D> ("Textures/wdot.jpg");
+			mat.mainTexture = Resources.Load<Texture2D> ("Textures/wdot");
 			mat.color = new Color (1, 5, 1, 1);
-			transform.eulerAngles = new Vector3 (0, 0, -45);
+			//transform.eulerAngles = new Vector3 (0, 0, -45);
 		}
 
 	}

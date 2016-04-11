@@ -38,8 +38,7 @@ public class Player : MonoBehaviour {
 		model.damage ();
 	}
 
-	public void
-	 destroy(){
+	public void destroy(){
 		model.damage();
 	}
 

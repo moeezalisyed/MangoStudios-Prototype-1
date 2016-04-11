@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 			if ( shadowPlayers.Count <= 5) {
 				playertype++;
 			} else if (shadowPlayers.Count > 5) {
-				//this.gameOver();
+				this.gameOver();
 			
 			}
 			playertype = playertype % 3 ;
