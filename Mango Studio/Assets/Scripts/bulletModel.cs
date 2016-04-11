@@ -25,7 +25,7 @@ public class bulletModel : MonoBehaviour
 		currenty = 0;
 		movebuf = 0;
 		transform.position = new Vector3 (owner.m.transform.position.x, owner.m.transform.position.y, 0);
-		name = "Bullet Model";
+		name = "BulletModel";
 		mat = GetComponent<Renderer> ().material;
 		mat.shader = Shader.Find ("Sprites/Default");
 		/*if (owner.m.getType () == 1) {
@@ -63,23 +63,27 @@ public class bulletModel : MonoBehaviour
 	void Update(){
 		clock += Time.deltaTime;
 		transform.Translate (Vector3.up * speed * Time.deltaTime);
-
-
-
-		if (owner.m.getType () == 2) {
+		if (owner.m.getType () == 0) {
 			//transform.position = new Vector3 (transform.position.x + speed * movex, transform.position.y + speed * movey);
-			if (clock > 0.3) {
+			if (clock > 1.3) {
+				destroy ();
+			}
+
+
+		} else if (owner.m.getType () == 2) {
+			//transform.position = new Vector3 (transform.position.x + speed * movex, transform.position.y + speed * movey);
+			if (clock > 0.9) {
 				destroy ();
 			}
 		} else if (owner.m.getType () == 1) {
 			//transform.position = new Vector3 (transform.position.x + speed, transform.position.y + speed *Mathf.Sin(clock*20));
-			if (clock > 0.6) {
+			if (clock > 0.8) {
 				destroy ();
 			}
 		} else if (owner.m.getType () == 3) {
 			//speed = 0.1f;
 			//transform.position = new Vector3 (transform.position.x + speed * movex, transform.position.y + speed * movey);
-			if (clock > 0.2) {
+			if (clock > 0.6) {
 				destroy ();
 			}
 		} 

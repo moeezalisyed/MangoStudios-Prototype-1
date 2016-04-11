@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private List<Player> players; // list of all placed players
 	public Player currentplayer;
-
+	private List<Player> shadowPlayers = new List<Player>();
     // Beat tracking
     private float clock;
     private float startTime;
@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 	private List<Vector3> shadow;
 	private int shadowiterator;
 	private Boolean startitr;
+	public Boss THEBOSS;
+	public Boolean gameover = false;
 
 
     // Level number
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
 		GameObject bossObject = new GameObject();
 		Boss boss = bossObject.AddComponent<Boss>();
 		boss.init (this);
+		THEBOSS = boss;
 
 	}
         
@@ -81,23 +84,23 @@ public class GameManager : MonoBehaviour
     {
 		clock += Time.deltaTime;
 	//	shadow.Add (currentplayer.model.transform.localPosition);
-		if (Input.GetKey (KeyCode.RightArrow) && currentplayer.transform.position.x < 3) {
+		if (Input.GetKey (KeyCode.RightArrow) ) {
 			currentplayer.direction = 3;
 			currentplayer.transform.eulerAngles = new Vector3 (0, 0, currentplayer.direction * 90);
 			currentplayer.transform.Translate (Vector3.up * 4 * Time.deltaTime);
 		} 
-		if (Input.GetKey (KeyCode.UpArrow) && currentplayer.transform.position.y < 3) {
+		if (Input.GetKey (KeyCode.UpArrow) ) {
 			currentplayer.direction = 0;
 			currentplayer.transform.eulerAngles = new Vector3 (0, 0, currentplayer.direction * 90);
 			currentplayer.transform.Translate (Vector3.up * 4 * Time.deltaTime);
 
 		}
-		if (Input.GetKey (KeyCode.LeftArrow) && currentplayer.transform.position.x > -8){
+		if (Input.GetKey (KeyCode.LeftArrow) ){
 			currentplayer.direction = 1;
 			currentplayer.transform.eulerAngles = new Vector3 (0, 0, currentplayer.direction * 90);
 			currentplayer.transform.Translate (Vector3.up * 4 * Time.deltaTime);
 		}
-		if (Input.GetKey (KeyCode.DownArrow) && currentplayer.transform.position.y > -8) {
+		if (Input.GetKey (KeyCode.DownArrow) ) {
 			currentplayer.direction = 2;
 			currentplayer.transform.eulerAngles = new Vector3 (0, 0, currentplayer.direction * 90);
 			currentplayer.transform.Translate (Vector3.up * 4 * Time.deltaTime);
@@ -106,14 +109,21 @@ public class GameManager : MonoBehaviour
 			currentplayer.shoot();
 		}
 		//setHealthText ();
-		if (currentplayer.getHealth () == 0) {
+		if (currentplayer.getHealth () <= 0) {
 			currentplayer.destroy();
+
 			players.Remove(currentplayer);
+			shadowPlayers.Add (currentplayer);
 			//startitr = true;
 
-			if (playertype < 4) {
+			if ( shadowPlayers.Count <= 5) {
 				playertype++;
+			} else if (shadowPlayers.Count > 5) {
+				//this.gameOver();
+			
 			}
+			playertype = playertype % 3 ;
+			playertype++;
 			addPlayer (playertype, 1, -4, -4);
 			currentplayer = players [0];
 			if (playertype == 3) {
@@ -146,6 +156,69 @@ public class GameManager : MonoBehaviour
 	void setHealthText (){
 		HealthText.text = "Health: "+currentplayer.getHealth();
 	}
+
+	public void gameOver(){
+		foreach (Player x in shadowPlayers) {
+			Destroy (x.gameObject);
+		}
+		foreach (Player x in this.players) {
+			Destroy (x.gameObject);
+		}
+		Destroy (THEBOSS.gameObject);
+		this.gameover = true;
+
+	}
+
+	void OnGUI(){
+		if (this.gameover) {
+
+
+			GUI.skin.box.alignment = TextAnchor.MiddleLeft;
+			GUI.skin.box.fontSize = 25;
+			string s = "GAME OVER!";
+
+
+			GUI.Box (new Rect (Screen.width/2 - 200, Screen.height/2 -50, 200, 100), s);
+			s = null;
+			GUI.color = Color.white;
+			GUI.skin.box.fontSize = 12;
+			GUI.skin.box.alignment = TextAnchor.MiddleCenter;
+		
+		
+			if (this.currentplayer.model.healthval > 3) {			
+				GUI.color = Color.green;
+			} else {
+				GUI.color = Color.red;
+			}
+			GUI.skin.box.alignment = TextAnchor.MiddleLeft;
+			GUI.skin.box.fontSize = 22;
+			 s = "";
+
+			for (int i = 0; i < this.currentplayer.model.healthval; i++) {
+
+				s += "I";
+
+			}
+
+			GUI.Box(new Rect (10, 150, 200, 100), s);
+
+			GUI.color = Color.white;
+			GUI.skin.box.fontSize = 12;
+			GUI.skin.box.alignment = TextAnchor.MiddleCenter;
+		
+		
+		
+		
+		
+		
+		}
+
+
+
+
+	}
+
+
 
 
 

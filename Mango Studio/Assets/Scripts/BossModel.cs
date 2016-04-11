@@ -19,6 +19,10 @@ public class BossModel : MonoBehaviour {
 		mat.color = new Color(1,0,0);
 	}
 
+	public void changeTexture(int texType){
+		
+	}
+
 	
 	// Update is called once per frame
 	void Update () {

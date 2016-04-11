@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 
 	public playerModel model;		// The model object.
-	private int playerType;
+	public int playerType;
 	//private int initHealth;
 	public GameManager m;		// A pointer to the manager (not needed here, but potentially useful in general).
 	public int direction = 0;

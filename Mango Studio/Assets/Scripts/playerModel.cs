@@ -13,7 +13,7 @@ public class playerModel : MonoBehaviour
 	private int movex;
 	private int movey;
 	private float speed;
-	private int healthval = 10;
+	public int healthval = 10;
 	//private float damagebuf;
 	private float cd;
 	private float cdbuf;
@@ -89,9 +89,11 @@ public class playerModel : MonoBehaviour
 //				damagebuf = clock;
 //			}
 		} else {
+			
 			if (shadowitr >= shadowMovements.Count) {
 				shadowitr = 0;
 			}
+			this.mat.color = Color.gray;
 			//this.mat.shader = Shader.Find("Transparent/Diffuse");
 			if (shadowFiring [shadowitr] == true) {
 				this.shoot ();
@@ -193,18 +195,18 @@ public class playerModel : MonoBehaviour
 		print ("went off screen");
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-		print ("col");
-		if (other.name == "Boss") {
-			this.damage ();
-		}
-		if (other.name == "BossBullet") {
-			this.damage ();
-		}
-		if (other.name == "BossBeam") {
-			this.damage ();
-		}
-	}
+//	void OnTriggerEnter2D(Collider2D other){
+//		//print ("col");
+//		if (other.name == "Boss") {
+//			this.damage ();
+//		}
+//		if (other.name == "BossBullet") {
+//			this.damage ();
+//		}
+//		if (other.name == "BossBeam") {
+//			this.damage ();
+//		}
+//	}
 
 
 

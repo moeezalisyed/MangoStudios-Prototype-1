@@ -11,6 +11,7 @@ public class Boss : MonoBehaviour {
 	private bool charge;
 	private float charging;
 	private float chargeSpeed;
+	public int bossHealth;
 
 	// Use this for initialization
 	public void init (GameManager owner) {
@@ -18,12 +19,13 @@ public class Boss : MonoBehaviour {
 		speed = .7f;
 		chargeSpeed = 3;
 		m = owner;
-
+		this.bossHealth = 100;
 		var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
 		model = modelObject.AddComponent<BossModel>();						// Add a marbleModel script to control visuals of the gem.
 		model.init(this);
 
 		BoxCollider2D bossbody = gameObject.AddComponent<BoxCollider2D> ();
+		bossbody.name = "Boss";
 		Rigidbody2D bossRbody = gameObject.AddComponent<Rigidbody2D> ();
 		bossRbody.gravityScale = 0;
 		bossbody.isTrigger = true;
@@ -33,6 +35,7 @@ public class Boss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		model.changeTexture (this.bossHealth/10);
 		float playerx = m.currentplayer.transform.position.x;
 		float playery = m.currentplayer.transform.position.y;
 		if ((playery - this.transform.position.y) <= 0 && !charge) {
@@ -92,5 +95,61 @@ public class Boss : MonoBehaviour {
 		beam.init (this);
 		beam.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,0);
 
+	}
+
+
+
+	public void dealDamage(int damage){
+		this.bossHealth -= damage;
+		print ("bosshealth: " + bossHealth);
+	}
+
+	void OnGUI(){
+		if (this.bossHealth > 30) {			
+			GUI.color = Color.green;
+		} else {
+			GUI.color = Color.red;
+		}
+		GUI.skin.box.alignment = TextAnchor.MiddleLeft;
+		GUI.skin.box.fontSize = 25;
+		string s = "";
+
+		for (int i = 0; i < this.bossHealth / 10; i++) {
+		
+			s += "I";
+
+		}
+
+		GUI.Box(new Rect (10, 10, 200, 100), s);
+
+		GUI.color = Color.white;
+		GUI.skin.box.fontSize = 12;
+		GUI.skin.box.alignment = TextAnchor.MiddleCenter;
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+//		//print ("entered inside the boss");
+//		int damage = 0;
+//		if (other.name == "BulletModel") {
+//			print ("entered collider in character bullet");
+//			switch(0){
+//
+//			case 0:
+//				damage = 11;
+//				break;
+//
+//			case 1:
+//				damage = 8;
+//				break;
+//
+//			case 2:
+//				damage = 6;
+//				break;
+//
+//			}
+//
+//			m.THEBOSS.dealDamage (damage);
+//		}
+	
 	}
 }
