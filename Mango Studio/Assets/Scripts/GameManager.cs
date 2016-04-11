@@ -106,6 +106,8 @@ public class GameManager : MonoBehaviour
 			currentplayer.transform.Translate (Vector3.up * 4 * Time.deltaTime);
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			//The next line is just for testing texture 
+			//this.THEBOSS.dealDamage (5);
 			currentplayer.shoot();
 		}
 		//setHealthText ();

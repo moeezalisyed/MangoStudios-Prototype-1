@@ -150,6 +150,7 @@ public class playerModel : MonoBehaviour
 
 	public void destroy(){
 		firstRun = false;
+		this.owner.m.THEBOSS.bossHealth = 100;
 		foreach (Player x in owner.m.shadowPlayers) {
 			x.model.shadowitr = 0;
 		}

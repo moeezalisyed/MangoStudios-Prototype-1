@@ -20,12 +20,12 @@ public class BossModel : MonoBehaviour {
 	}
 
 	public void changeTexture(int texType){
-		
+		mat.mainTexture = Resources.Load<Texture2D>("Textures/Square"+texType);	// Set the texture.  Must be in Resources folder.
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }

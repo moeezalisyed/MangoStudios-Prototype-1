@@ -101,6 +101,28 @@ public class Boss : MonoBehaviour {
 
 	public void dealDamage(int damage){
 		this.bossHealth -= damage;
+		if (this.bossHealth > 90 && this.bossHealth <= 100) {
+			//do nothing
+			
+		} else if (this.bossHealth > 80 && this.bossHealth <= 90 ) {
+			model.changeTexture (1);
+		} else if (this.bossHealth > 70&& this.bossHealth <= 80) {
+			model.changeTexture (2);
+		} else if (this.bossHealth > 60&& this.bossHealth <= 70) {
+			model.changeTexture (3);
+		} else if (this.bossHealth > 50&& this.bossHealth <= 60) {
+			model.changeTexture (4);
+		} else if (this.bossHealth > 40&& this.bossHealth <= 50) {
+			model.changeTexture (5);
+		} else if (this.bossHealth > 30&& this.bossHealth <= 40) {
+			model.changeTexture (6);
+		} else if (this.bossHealth > 20&& this.bossHealth <= 30) {
+			model.changeTexture (7);
+		} else if (this.bossHealth > 10&& this.bossHealth <= 20) {
+			model.changeTexture (8);
+		} else {
+			//model.changeTexture (9);
+		}
 		print ("bosshealth: " + bossHealth);
 	}
 
