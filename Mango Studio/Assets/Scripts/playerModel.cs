@@ -91,16 +91,16 @@ public class playerModel : MonoBehaviour
 		} else {
 			
 			if (shadowitr >= shadowMovements.Count) {
-				shadowitr = 0;
+				//shadowitr = 0;
+			} else {
+				this.mat.color = Color.gray;
+				//this.mat.shader = Shader.Find("Transparent/Diffuse");
+				if (shadowFiring [shadowitr] == true) {
+					this.shoot ();
+				}
+				this.transform.position = shadowMovements [shadowitr];
+				shadowitr++;
 			}
-			this.mat.color = Color.gray;
-			//this.mat.shader = Shader.Find("Transparent/Diffuse");
-			if (shadowFiring [shadowitr] == true) {
-				this.shoot ();
-			}
-			this.transform.position = shadowMovements [shadowitr];
-			shadowitr++;
-
 		
 		}
 	}
@@ -149,8 +149,11 @@ public class playerModel : MonoBehaviour
 	}
 
 	public void destroy(){
-		
 		firstRun = false;
+		foreach (Player x in owner.m.shadowPlayers) {
+			x.model.shadowitr = 0;
+		}
+
 	}
 
 	public int getType(){

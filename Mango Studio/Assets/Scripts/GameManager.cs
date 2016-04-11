@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private List<Player> players; // list of all placed players
 	public Player currentplayer;
-	private List<Player> shadowPlayers = new List<Player>();
+	public List<Player> shadowPlayers = new List<Player>();
     // Beat tracking
     private float clock;
     private float startTime;
