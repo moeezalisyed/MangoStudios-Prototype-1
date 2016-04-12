@@ -66,5 +66,7 @@ public class Player : MonoBehaviour {
 			this.destroy ();
 		}
 	}
+
+
 }
 
