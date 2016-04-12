@@ -105,7 +105,7 @@ public class playerModel : MonoBehaviour
 		}
 	}
 
-	void OnGUI(){
+	//void OnGUI(){
 //		GUI.color = Color.green;
 //		GUI.skin.box.alignment = TextAnchor.MiddleLeft;
 //		string s = "";
@@ -129,7 +129,7 @@ public class playerModel : MonoBehaviour
 //		GUI.skin.box.alignment = TextAnchor.MiddleCenter;
 	
 	
-	}
+	//}
 
 
 	public void move(int x, int y){
@@ -211,6 +211,24 @@ public class playerModel : MonoBehaviour
 //			this.damage ();
 //		}
 //	}
+
+	void OnGUI(){
+
+		GUI.color = Color.yellow;
+		GUI.skin.box.alignment = TextAnchor.MiddleLeft;
+		GUI.skin.box.fontSize = 25;
+		string s = "";
+
+		for (int i = 0; i < (cd-clock+cdbuf) *10 ; i++) {
+			s += "I";
+		}
+
+		GUI.Box(new Rect (10, 500, 200, 100), s);
+
+		GUI.color = Color.white;
+		GUI.skin.box.fontSize = 12;
+		GUI.skin.box.alignment = TextAnchor.MiddleCenter;
+	}
 
 
 

@@ -68,8 +68,6 @@ public class bulletModel : MonoBehaviour
 			if (clock > 1.3) {
 				destroy ();
 			}
-
-
 		} else if (owner.m.getType () == 2) {
 			//transform.position = new Vector3 (transform.position.x + speed * movex, transform.position.y + speed * movey);
 			if (clock > 0.9) {
